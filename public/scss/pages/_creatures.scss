@@ -1,0 +1,40 @@
+.creaturelistcontainer{
+	display: block;
+	.creaturelist{
+		display: flex;
+		justify-content: center;
+		align-content: stretch;
+		flex-wrap: wrap;
+		.creaturecontainer{
+			padding: 8px;
+			.creaturicon{
+				display: block;
+				img{
+					height: 128px;
+					width: 128px;
+				}
+			}
+			.creatureinfo{
+				display: block;
+				width: 120px;
+				height: 120px;
+				padding: 8px;
+				background-color: $infocolor;
+				.icons{
+					display: block;
+					.row{
+						line-height: 26px;
+						vertical-align: middle;
+						align-items: center;
+						img{
+							display: inline-block;
+							width: 26px;
+							height: 26px;
+							vertical-align: middle;
+						}
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,246 @@
+<?php namespace App\Controllers;
+
+use CodeIgniter\Controller;
+
+class Items extends Controller
+{
+
+	public function index(string $type)
+	{
+		$db = \Config\Database::connect();
+		$builder = $db->table('creatures');
+		$builder->join('available_months', 'creatures.id = available_months.creature_id', 'left');
+		$builder->where('creatures.type', $type);
+		$builder->where('available_months.month', date('n'));
+		$builder->groupBy('creatures.id');
+		$query = $builder->get();
+		$data['creatures'] = array();
+		foreach($query->getResult() as $row){
+			$data['creatures'][] = $row;
+		}
+
+		echo view('layout/header');
+		echo view('creatures', $data);
+		echo view('layout/footer');
+	}
+
+	public function importer(){
+		$importdir = FCPATH . '../../villagerdb/data/items/';
+		if(file_exists($importdir)){
+			$dirlist = scandir($importdir);
+
+			$db = \Config\Database::connect();
+
+			$iteminsert = array();
+
+			$availablemonths = array();
+
+
+			// Add creatures
+			foreach($dirlist as $file){
+				$filepath = $importdir . $file;
+				if(!is_dir($filepath)){
+					$data = file_get_contents($filepath);
+					if(strpos($data, '"nh":') !== false){
+
+						$data = json_decode($data, true);
+
+						// Check if fish or bug then parse source
+						if(isset(($data['games']['nh']['sources'])) && in_array($data['category'], array('Fish', 'Bugs'))){
+
+							$itemid = $category = $sell = $buy = $size = $foundat = null;
+							$fin = 0;
+							$timestart = 0;
+							$timeend = 23;
+
+							if($data['category'] === 'Fish'){
+								$category = 'fish';
+							}else{
+								$category = 'insect';
+							}
+
+							// Check price
+							if(isset($data['games']['nh']['sellPrice']['value'])){
+								$sell = $data['games']['nh']['sellPrice']['value'];
+							}
+							if(isset($data['games']['nh']['buyPrices'][0]['value'])){
+								$buy = $data['games']['nh']['buyPrices'][0]['value'];
+							}
+
+							// Check source
+							if(isset($data['games']['nh']['sources'][0])){
+								$source = $data['games']['nh']['sources'][0];
+
+								// Check size and fin for fish
+								if($category === 'fish'){
+									if(stripos($source, 'finned') !== false){
+										$fin = 1;
+										$size = 6;
+									}
+									if(preg_match('/^North:\s([A-Za-z]+)\sShadows/', $source, $shadowsize) === 1){
+										switch (strtolower(end($shadowsize))) {
+											case 'narrow':
+												$size = 1;
+												break;
+
+											case 'tiny':
+												$size = 2;
+												break;
+											
+											case 'small':
+												$size = 3;
+												break;
+
+											case 'medium':
+												$size = 4;
+												break;
+
+											case 'large':
+												$size = 5;
+												break;
+
+											case 'huge':
+												$size = 6;
+												break;
+										}
+
+									}
+								}
+
+
+								// Get months
+								if(preg_match('/,\s([A-Za-z\s\-]+)\s\(/', $source, $months) === 1){
+									$months = end($months);
+									if(strtolower($months) === 'all year'){
+										$availablemonths[$data['name']] = null;
+									}else{
+										$months = explode(' and ', $months);
+										foreach($months as $range){
+											$range = explode('-', $range);
+											foreach($range as &$m){
+												$m = intval(date_create_from_format('M', $m)->format('n'));
+											}
+											if($range[0] < $range[1]){
+												$range = range($range[0], $range[1]);
+												foreach($range as $m){
+													$availablemonths[$data['name']][] = $m;
+												}
+											}else{
+												$range = array_merge(
+													range($range[0], 12),
+													range(1, $range[1])
+												);
+											}
+										}
+									}
+
+								}
+
+								// Get time
+								if(preg_match('/\((.*)\)$/', $source, $time) === 1){
+									$time = end($time);
+									if(strtolower($time) !== 'all day'){
+										$times = explode('-', $time);
+										foreach($times as $tkey => $time){
+											$i = intval(str_replace(array('am', 'pm'), '', $time));
+											if(stripos($time, 'pm') !== false){
+												var_dump($i);
+												$i = $i + 12;
+											}
+											if($tkey === 0){
+												$timestart = $i;
+											}else{
+												$timeend = $i;
+											}
+										}
+									}
+								}
+
+								// Get location
+								if(preg_match('/Shadows\s(.*)\,/i', $source, $location) === 1){
+									$location = strtolower(end($location));
+									switch ($location) {
+										case 'at sea':
+											$foundat = 'sea';
+											break;
+										
+										case 'on river':
+											$foundat = 'river';
+											break;
+
+										case 'at pier':
+											$foundat = 'pier';
+											break;
+
+										case 'in pond':
+											$foundat = 'pond';
+											break;
+
+										case 'on clifftop rivers':
+											$foundat = 'clifftop river';
+											break;
+
+										case 'at sea while raining':
+											$foundat = 'sea (rain)';
+											break;
+
+										case 'on river mouth':
+											$foundat = 'river mouth';
+											break;
+									}
+								}
+
+
+
+							}
+
+							// If new item then create
+							if(!isset($items[$data['name']])){
+								$iteminsert[] = array(
+									'name' => $data['name'],
+									'type' => $category,
+									'sell' => $sell,
+									'buy' => $buy,
+									'size' => $size,
+									'fin' => $fin,
+									'location' => $foundat,
+									'time_start' => $timestart,
+									'time_end' => $timeend
+								);
+							}
+						}
+					}
+				}
+			}
+
+			// $sources = array_unique($sources);
+			// sort($sources);
+			// print "<pre>";
+			// var_dump($sources);
+			// exit();
+
+			// Insert creatures
+			$builder = $db->table('creatures');
+			if(!empty($iteminsert)){
+				$builder->insertBatch($iteminsert);
+			}
+
+			// Add month availability
+			$creatures = $builder->get();
+			$monthinsert = array();
+			foreach($creatures->getResult() as $row){
+				if(isset($availablemonths[$row->name])){
+					foreach($availablemonths[$row->name] as $month){
+						$monthinsert[] = array(
+							'creature_id' => $row->id,
+							'month' => $month
+						);
+					}
+				}
+			}
+			$builder = $db->table('available_months');
+			$builder->insertBatch($monthinsert);
+		}
+
+	}
+}

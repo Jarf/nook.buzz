@@ -21,7 +21,7 @@ class App extends BaseConfig
 	| environments.
 	|
 	*/
-	public $baseURL = 'http://localhost/nook.buzz/';
+	public $baseURL = 'http://localhost/nookbuzz/';
 
 	/*
 	|--------------------------------------------------------------------------

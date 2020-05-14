@@ -12,8 +12,8 @@
 </head>
 <body>
 	<div class="headermenu">
-		<a href="/creatures/fish" class="headerbutton fish">
+		<a href="/fish" class="headerbutton fish">
 		</a>
-		<a href="/creatures/insect" class="headerbutton insect">
+		<a href="/insect" class="headerbutton insect">
 		</a>
 	</div>

@@ -30,10 +30,10 @@ $routes->setAutoRoute(true);
 
 // We get a performance increase by specifying the default
 // route since we don't have to scan directories.
-$routes->get('/', 'Home::index');
 $routes->add('itemsimport', 'Items::importer');
-$routes->add('creatures/(:alpha)', 'Items::index/$1');
 $routes->add('/main.css', 'Files::styles');
+$routes->add('/', 'Items::index/fish');
+$routes->add('/(:alpha)', 'Items::index/$1');
 
 /**
  * --------------------------------------------------------------------

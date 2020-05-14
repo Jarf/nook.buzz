@@ -11,8 +11,6 @@ Options All -Indexes
 	Options +FollowSymlinks
 	RewriteEngine On
 
-  RewriteBase /public/
-
 	RewriteCond %{REQUEST_FILENAME} !-d
 	RewriteRule ^(.*)/$ /$1 [L,R=301]
 

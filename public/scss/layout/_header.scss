@@ -1,0 +1,18 @@
+.headermenu{
+	display: flex;
+	a.headerbutton{
+		flex-grow: 1;
+		border: 1px solid $bordercolor;
+		background-repeat: no-repeat;
+		background-position: center;
+		background-color: $backgroundcolor;
+		height: 32px;
+		cursor: pointer;
+	}
+	a.headerbutton.fish{
+		background-image: url('images/icon-fish.png');
+	}
+	a.headerbutton.insect{
+		background-image: url('images/icon-insect.png');
+	}
+}

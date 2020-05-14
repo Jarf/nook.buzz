@@ -1,0 +1,13 @@
+$backgroundcolor: #fff9e3;
+$bordercolor: #eaba6b;
+$infocolor: #fce6b4;
+
+@import 'layout/header';
+@import 'layout/footer';
+
+@import 'pages/creatures';
+
+body{
+	margin: 0;
+	background: $backgroundcolor;
+}

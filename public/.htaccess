@@ -13,7 +13,7 @@ Options All -Indexes
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
   RewriteCond $1 !^(\.css|\.js|\.jpg|\.jpeg|\.png|\.gif|\.ico|\.svg|service-worker\.js|server-status|humans\.txt|index\.php|deploy\.php|manifest\.json|google[a-z\d]+.html|deploy|admin|media|database|robots\.txt|vendor) [NC]
-  RewriteRule ^(.*)$ index.php/$1 [L]
+  RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
 </IfModule>
 
 <IfModule !mod_rewrite.c>

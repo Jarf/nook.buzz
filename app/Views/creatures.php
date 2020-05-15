@@ -6,14 +6,14 @@
 		<div class="creaturecontainer">
 			<label for="<?=$creature->sanitisedname?>">
 				<div class="creatureicon">
-					<img src="/images/NH-Icon-<?=$creature->sanitisedname?>.png"/>
+					<img height="128" width="128" alt="<?=$creature->name?>" src="/images/NH-Icon-<?=$creature->sanitisedname?>.png"/>
 				</div>
 			</label>
 			<input type="radio" id="<?=$creature->sanitisedname?>" name="creatureselect" class="creaturecheckbox"/>
 			<div class="creatureinfocontainer">
 				<label class="closebutton" for="nocreatureselected">X</label>
 				<div class="creatureicon">
-					<img src="/images/NH-Icon-<?=$creature->sanitisedname?>.png"/>
+					<img height="128" width="128" alt="<?=$creature->name?>" src="/images/NH-Icon-<?=$creature->sanitisedname?>.png"/>
 					<span class="creaturetitle">
 						<?=$creature->name?>
 					</span>

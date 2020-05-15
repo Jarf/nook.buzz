@@ -16,7 +16,29 @@ class Items extends Controller
 		$query = $builder->get();
 		$data['creatures'] = array();
 		foreach($query->getResult() as $row){
+
+			// Sanitise name for icon
+			$row->sanitisedname = preg_replace('/[^a-z]/', '', strtolower($row->name));
+
+			// Prase available time
+			if($row->time_start === '0' && $row->time_end === '23'){
+				$row->timereadable = 'All Day';
+			}else{
+				$row->timereadable = array();
+				foreach (array($row->time_start, $row->time_end) as $value) {
+					$value = intval($value);
+					if($value > 12){
+						$row->timereadable[] = ($value - 12) . 'pm';
+					}else{
+						$row->timereadable[] = $value . 'am';
+					}
+				}
+				$row->timereadable = implode(' - ', $row->timereadable);
+			}
+
 			$data['creatures'][] = $row;
+
+
 		}
 
 		echo view('layout/header');

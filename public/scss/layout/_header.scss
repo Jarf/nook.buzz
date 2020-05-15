@@ -15,4 +15,7 @@
 	a.headerbutton.insect{
 		background-image: url('images/icon-insect.png');
 	}
+	a.active{
+		background-color: $bordercolor;
+	}
 }

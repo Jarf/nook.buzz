@@ -7,6 +7,9 @@
 		align-content: stretch;
 		flex-wrap: wrap;
 		.creaturecontainer{
+			label{
+				cursor: pointer;
+			}
 			.creaturicon{
 				img{
 					max-height: 128px;
@@ -44,6 +47,7 @@
 				right: -16px;
 				top: -16px;
 				color: #ffffff;
+				cursor: pointer;
 			}
 		}
 		.creaturecheckbox:checked + .creatureinfocontainer{

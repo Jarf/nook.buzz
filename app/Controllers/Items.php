@@ -5,16 +5,18 @@ use CodeIgniter\Controller;
 class Items extends Controller
 {
 
-	public function index(string $type)
+	public function index(string $type, string $all = 'false')
 	{
 		$db = \Config\Database::connect();
 		$builder = $db->table('creatures');
 		$builder->join('available_months', 'creatures.id = available_months.creature_id', 'left');
 		$builder->where('creatures.type', $type);
-		$builder->groupStart();
-			$builder->where('available_months.month', date('n'));
-			$builder->orWhere('available_months.month IS NULL', null, false);
-		$builder->groupEnd();
+		if($all === 'false'){
+			$builder->groupStart();
+				$builder->where('available_months.month', date('n'));
+				$builder->orWhere('available_months.month IS NULL', null, false);
+			$builder->groupEnd();
+		}
 		$builder->groupBy('creatures.id');
 		$query = $builder->get();
 		$data['creatures'] = array();

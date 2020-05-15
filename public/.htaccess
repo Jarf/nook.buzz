@@ -12,7 +12,7 @@ Options All -Indexes
 	RewriteEngine On
   RewriteCond %{REQUEST_FILENAME} !-f
   RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteCond $1 !^(\.css|\.js|\.jpg|\.jpeg|\.png|\.gif|\.ico|\.svg|\.js|humans\.txt|robots\.txt [NC]
+  RewriteCond $1 !^(\.css|\.js|\.jpg|\.jpeg|\.png|\.gif|\.ico|\.svg|\.js|humans\.txt|robots\.txt) [NC]
   RewriteRule ^(.*)$ index.php?/$1 [L,QSA]
 </IfModule>
 

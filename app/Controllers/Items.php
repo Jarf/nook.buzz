@@ -18,6 +18,7 @@ class Items extends Controller
 			$builder->groupEnd();
 		}
 		$builder->groupBy('creatures.id');
+		$builder->orderBy('creatures.sell', 'DESC');
 		$query = $builder->get();
 		$data['creatures'] = array();
 		foreach($query->getResult() as $row){

@@ -184,13 +184,17 @@ class Items extends Controller
 												$range[$mkey] = intval(date_create_from_format('M', $m)->format('n'));
 											}
 
-											if($range[0] < $range[1]){
-												$range = range($range[0], $range[1]);
+											if(count($range) === 1){
+												$range = array(intval(current($range)));
 											}else{
-												$range = array_merge(
-													range($range[0], 12),
-													range(1, $range[1])
-												);
+												if($range[0] < $range[1]){
+													$range = range($range[0], $range[1]);
+												}else{
+													$range = array_merge(
+														range($range[0], 12),
+														range(1, $range[1])
+													);
+												}
 											}
 											foreach($range as $m){
 												$availablemonths[$data['name']][] = $m;
@@ -220,8 +224,8 @@ class Items extends Controller
 								}
 
 								// Get location
-								if(preg_match('/Shadows\s(.*)\,/i', $source, $location) === 1){
-									$location = strtolower(end($location));
+								if(preg_match('/Shadows\s(.*)\,/i', $source, $location) === 1 && $category === 'fish'){
+									$location = trim(strtolower(end($location)));
 									switch ($location) {
 										case 'at sea':
 											$foundat = 'sea';
@@ -251,8 +255,95 @@ class Items extends Controller
 											$foundat = 'river mouth';
 											break;
 									}
-								}
+								}elseif(preg_match('/^North:\s([A-Za-z\s]+),/i', $source, $location) && $category === 'insect'){
+									$location = trim(strtolower(end($location)));
+									switch($location) {
+										case 'flying around':
+											$foundat = 'flying';
+											break;
 
+										case 'near rotten food on the ground':
+											$foundat = 'rotten food';
+											break;
+
+										case 'on the side of trees':
+											$foundat = 'tree trunk';
+											break;
+
+										case 'on the ground':
+										case 'on ground':
+											$foundat = 'ground';
+											break;
+
+										case 'on the side of coconut trees':
+											$foundat = 'coconut tree';
+											break;
+
+										case 'hit rock with shovel or axe':
+											$foundat = 'hit rock';
+											break;
+
+										case 'on rocks and bushes during rain':
+											$foundat = 'rocks and bushes (rain)';
+											break;
+
+										case 'rolling snowballs on ground':
+											$foundat = 'rolling snowballs';
+											break;
+
+										case 'shake trees':
+										case 'from nest after shaking trees':
+											$foundat = 'shake trees';
+											break;
+
+										case 'bouncing on villagers heads':
+											$foundat = 'villagers';
+											break;
+
+										case 'walking on top of rivers and ponds':
+											$foundat = 'ponds and rivers';
+											break;
+
+										case 'flying around flowers':
+										case 'on flowers':
+											$foundat = 'flowers';
+											break;
+
+										case 'flying around hybrid flowers':
+											$foundat = 'hybrid flowers';
+											break;
+
+										case 'on stumps':
+											$foundat = 'tree stump';
+											break;
+
+										case 'on shore rocks':
+											$foundat = 'shore rocks';
+											break;
+
+										case 'disguised as furniture leaf near trees':
+											$foundat = 'disguised as furniture leaf';
+											break;
+
+										case 'underground (dig near chirping)':
+											$foundat = 'underground (near chirping)';
+											break;
+
+										case 'flying around lights and lamps outside':
+											$foundat = 'lights';
+											break;
+
+
+										case 'on the beach':
+											$foundat = 'beach';
+											break;
+
+										case 'flying around trash or rotten food':
+											$foundat = 'trash and rotten food';
+											break;
+
+									}
+								}
 
 
 							}

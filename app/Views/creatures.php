@@ -20,7 +20,9 @@
 				</div>
 				<ul class="creatureinfo">
 					<li>Value: <?=$creature->sell?></li>
+					<?php if(!empty($creature->size)): ?>
 					<li>Size: <?=$creature->sizereadable?></li>
+					<?php endif; ?>
 					<li>Location: <?=ucfirst($creature->location)?></li>
 					<li>Time: <?=$creature->timereadable?></li>
 				</ul>

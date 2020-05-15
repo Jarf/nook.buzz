@@ -142,19 +142,20 @@ class Items extends Controller
 										$months = explode(' and ', $months);
 										foreach($months as $range){
 											$range = explode('-', $range);
-											foreach($range as &$m){
-												$m = intval(date_create_from_format('M', $m)->format('n'));
+											foreach($range as $mkey => $m){
+												$range[$mkey] = intval(date_create_from_format('M', $m)->format('n'));
 											}
+
 											if($range[0] < $range[1]){
 												$range = range($range[0], $range[1]);
-												foreach($range as $m){
-													$availablemonths[$data['name']][] = $m;
-												}
 											}else{
 												$range = array_merge(
 													range($range[0], 12),
 													range(1, $range[1])
 												);
+											}
+											foreach($range as $m){
+												$availablemonths[$data['name']][] = $m;
 											}
 										}
 									}
@@ -169,7 +170,6 @@ class Items extends Controller
 										foreach($times as $tkey => $time){
 											$i = intval(str_replace(array('am', 'pm'), '', $time));
 											if(stripos($time, 'pm') !== false){
-												var_dump($i);
 												$i = $i + 12;
 											}
 											if($tkey === 0){
@@ -237,12 +237,6 @@ class Items extends Controller
 					}
 				}
 			}
-
-			// $sources = array_unique($sources);
-			// sort($sources);
-			// print "<pre>";
-			// var_dump($sources);
-			// exit();
 
 			// Insert creatures
 			$builder = $db->table('creatures');

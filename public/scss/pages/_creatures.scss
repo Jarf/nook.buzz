@@ -26,7 +26,7 @@
 			top: calc(50% - 130px);
 			left: calc(50% - 82px);
 			width: 164px;
-			height: 260px;
+			min-height: 260px;
 			box-shadow: 4px 4px 2px rgb(0,0,0,0.5);
 			.creatureicon{
 				text-align: center;

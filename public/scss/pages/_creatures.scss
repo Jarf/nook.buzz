@@ -16,13 +16,14 @@
 		}
 		.creatureinfocontainer{
 			display: none;
-			background-color: $bordercolor;
+			background-color: $infocolor;
 			border-radius: 16px;
 			padding: 16px;
 			position: fixed;
-			top: 50%;
-			left: 50%;
+			top: calc(50% - 130px);
+			left: calc(50% - 82px);
 			width: 164px;
+			height: 260px;
 			.creatureicon{
 				text-align: center;
 				border-color: $backgroundcolor;
@@ -32,13 +33,16 @@
 				background-color: $backgroundcolor;
 			}
 			.closebutton{
+				background-color: $bordercolor;
 				display: block;
 				position: absolute;
-				border-radius: 6px;
-				height: 12px;
-				width: 12px;
-				right: -6px;
-				top: -6px;
+				border-radius: 12px;
+				line-height: 24px;
+				text-align: center;
+				height: 24px;
+				width: 24px;
+				right: -12px;
+				top: -12px;
 			}
 		}
 		.creaturecheckbox:checked + .creatureinfocontainer{

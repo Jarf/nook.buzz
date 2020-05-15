@@ -25,7 +25,7 @@ class Items extends Controller
 			// Sanitise name for icon
 			$row->sanitisedname = preg_replace('/[^a-z]/', '', strtolower($row->name));
 
-			// Prase available time
+			// Parse available time
 			if($row->time_start === '0' && $row->time_end === '23'){
 				$row->timereadable = 'All Day';
 			}else{
@@ -39,6 +39,41 @@ class Items extends Controller
 					}
 				}
 				$row->timereadable = implode(' - ', $row->timereadable);
+			}
+
+			// Parse size
+			switch ($row->size) {
+				case 1:
+					$row->sizereadable = 'Narrow';
+					break;
+
+				case 2:
+					$row->sizereadable = 'Tiny';
+					break;
+
+				case 3:
+					$row->sizereadable = 'Small';
+					break;
+
+				case 4:
+					$row->sizereadable = 'Medium';
+					break;
+
+				case 5:
+					$row->sizereadable = 'Large';
+					break;
+
+				case 6:
+					$row->sizereadable = 'Huge';
+					break;
+				
+				default:
+					$row->sizereadable = $row->size;
+					break;
+			}
+
+			if(!empty($row->fin)){
+				$row->sizereadable .= ' (fin)';
 			}
 
 			$data['creatures'][] = $row;

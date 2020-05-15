@@ -27,6 +27,7 @@
 			left: calc(50% - 82px);
 			width: 164px;
 			height: 260px;
+			box-shadow: 4px 4px 2px rgb(0,0,0,0.5);
 			.creatureicon{
 				text-align: center;
 				border-color: $backgroundcolor;
@@ -34,6 +35,19 @@
 				border-width: 2px;
 				border-style: solid;
 				background-color: $backgroundcolor;
+				margin-bottom: 16px;
+				span.creaturetitle{
+					display: block;
+					text-align: center;
+					font-size: 16px;
+					line-height: 24px;
+					vertical-align: middle;
+				}
+			}
+			ul.creatureinfo{
+				margin: 0;
+				padding: 0;
+				list-style: none;
 			}
 			.closebutton{
 				background-color: $bordercolor;
@@ -44,8 +58,8 @@
 				text-align: center;
 				height: 32px;
 				width: 32px;
-				right: -16px;
-				top: -16px;
+				right: -8px;
+				top: -8px;
 				color: #ffffff;
 				cursor: pointer;
 			}

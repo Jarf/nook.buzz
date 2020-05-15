@@ -37,12 +37,13 @@
 				display: block;
 				position: absolute;
 				border-radius: 12px;
-				line-height: 24px;
+				line-height: 26px;
 				text-align: center;
 				height: 24px;
 				width: 24px;
 				right: -12px;
 				top: -12px;
+				color: #ffffff;
 			}
 		}
 		.creaturecheckbox:checked + .creatureinfocontainer{

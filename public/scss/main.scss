@@ -7,7 +7,16 @@ $infocolor: #fce6b4;
 
 @import 'pages/creatures';
 
+@font-face {
+	font-family: 'Conv_1579-fink-heavy-1361523207';
+	src: url('fonts/1579-fink-heavy-1361523207.eot');
+	src: local('☺'), url('fonts/1579-fink-heavy-1361523207.woff') format('woff'), url('fonts/1579-fink-heavy-1361523207.ttf') format('truetype'), url('fonts/1579-fink-heavy-1361523207.svg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
 body{
 	margin: 0;
 	background: $backgroundcolor;
+	font-family:'Conv_1579-fink-heavy-1361523207',Sans-Serif;
 }

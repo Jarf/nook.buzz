@@ -14,5 +14,38 @@
 				}
 			}
 		}
+		.creatureinfocontainer{
+			display: none;
+			background-color: $bordercolor;
+			border-radius: 16px;
+			padding: 16px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 164px;
+			.creatureicon{
+				text-align: center;
+				border-color: $backgroundcolor;
+				border-radius: 8px;
+				border-width: 2px;
+				border-style: solid;
+				background-color: $backgroundcolor;
+			}
+			.closebutton{
+				display: block;
+				position: absolute;
+				border-radius: 6px;
+				height: 12px;
+				width: 12px;
+				right: -6px;
+				top: -6px;
+			}
+		}
+		.creaturecheckbox:checked + .creatureinfocontainer{
+			display: block;
+		}
+	}
+	input.creaturecheckbox{
+		display: none;
 	}
 }

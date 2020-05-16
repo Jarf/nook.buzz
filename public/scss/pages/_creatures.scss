@@ -63,12 +63,34 @@
 				color: #ffffff;
 				cursor: pointer;
 			}
+			.creaturefoundbutton{
+				background-color: $bordercolor;
+				display: block;
+				margin: 8px 0;
+				padding: 8px;
+				border-radius: 4px;
+				text-align: center;
+				background-color: $infocolor;
+				.yes, .no{
+					display: none;
+				}
+			}
 		}
 		.creaturecheckbox:checked + .creatureinfocontainer{
 			display: block;
 		}
+		.creaturefoundcheckbox:checked + .creaturefoundbutton{
+			.yes{
+				display: inline-block;
+			}
+		}
+		.creaturefoundcheckbox:not(:checked) + .creaturefoundbutton{
+			.no{
+				display: inline-block;
+			}
+		}
 	}
-	input.creaturecheckbox{
+	input.creaturecheckbox, input.creaturefoundcheckbox{
 		display: none;
 	}
 }

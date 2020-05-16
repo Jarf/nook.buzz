@@ -1,6 +1,8 @@
 <div class="creaturelistcontainer">
 	<div class="month">
+		<a class="monthselect previousmonth" href="/<?=$type?>/<?=$monthprev?>"><</a>
 		<?=$month?>
+		<a class="monthselect nextmonth" href="/<?=$type?>/<?=$monthnext?>">></a>
 	</div>
 	<div class="creaturelist">
 	<?php

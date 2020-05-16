@@ -44,24 +44,28 @@ class Items extends Controller
 
 			// Parse size
 			switch ($row->size) {
-				case 1:
+				case 0:
 					$row->sizereadable = 'Narrow';
 					break;
 
-				case 2:
+				case 1:
 					$row->sizereadable = 'Tiny';
 					break;
 
-				case 3:
+				case 2:
 					$row->sizereadable = 'Small';
 					break;
 
-				case 4:
+				case 3:
 					$row->sizereadable = 'Medium';
 					break;
 
-				case 5:
+				case 4:
 					$row->sizereadable = 'Large';
+					break;
+
+				case 5:
+					$row->sizereadable = 'Very Large';
 					break;
 
 				case 6:
@@ -138,27 +142,30 @@ class Items extends Controller
 								if($category === 'fish'){
 									if(stripos($source, 'finned') !== false){
 										$fin = 1;
-										$size = 6;
 									}
-									if(preg_match('/^North:\s([A-Za-z]+)\sShadows/', $source, $shadowsize) === 1){
+									if(preg_match('/^North:\s([A-Za-z\s]+)\sShadows/', $source, $shadowsize) === 1){
 										switch (strtolower(end($shadowsize))) {
 											case 'narrow':
-												$size = 1;
+												$size = 0;
 												break;
 
 											case 'tiny':
-												$size = 2;
+												$size = 1;
 												break;
 											
 											case 'small':
-												$size = 3;
+												$size = 2;
 												break;
 
 											case 'medium':
-												$size = 4;
+												$size = 3;
 												break;
 
 											case 'large':
+												$size = 4;
+												break;
+
+											case 'very large':
 												$size = 5;
 												break;
 
@@ -366,6 +373,14 @@ class Items extends Controller
 					}
 				}
 			}
+
+			$db->transStart();
+			// Truncate tables
+				$db->query('SET FOREIGN_KEY_CHECKS = 0');
+				$db->query('TRUNCATE TABLE available_months');
+				$db->query('TRUNCATE TABLE creatures');
+				$db->query('SET FOREIGN_KEY_CHECKS = 1');
+			$db->transComplete();
 
 			// Insert creatures
 			$builder = $db->table('creatures');

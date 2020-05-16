@@ -26,6 +26,10 @@
 					<li>Location: <?=ucfirst($creature->location)?></li>
 					<li>Time: <?=$creature->timereadable?></li>
 				</ul>
+				<input type="checkbox" id="found<?=$creature->sanitisedname?>" class="creaturefoundcheckbox"/>
+				<label for="found<?=$creature->sanitisedname?>" class="creaturefoundbutton">
+					Discovered: <span class="yes">Yes</span><span class="no">No</span>
+				</label>
 			</div>
 		</div>
 		<?php

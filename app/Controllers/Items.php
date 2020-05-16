@@ -11,6 +11,7 @@ class Items extends Controller
 		$builder = $db->table('creatures');
 		$builder->join('available_months', 'creatures.id = available_months.creature_id', 'left');
 		$builder->where('creatures.type', $type);
+		$month = date('F');
 		if($all === 'false'){
 			$builder->groupStart();
 				$builder->where('available_months.month', date('n'));
@@ -18,10 +19,15 @@ class Items extends Controller
 			$builder->groupEnd();
 		}elseif($all !== 'all'){
 			$builder->groupStart();
-				$builder->where('available_months.month', intval(date_create_from_format('M', $all)->format('n')));
+				$month = date_create_from_format('M', $all);
+				$builder->where('available_months.month', intval($month->format('n')));
+				$month = $month->format('F');
 				$builder->orWhere('available_months.month IS NULL', null, false);
 			$builder->groupEnd();
+		}else{
+			$month = 'All';
 		}
+		$data['month'] = $month;
 		$builder->groupBy('creatures.id');
 		$builder->orderBy('creatures.sell', 'DESC');
 		$query = $builder->get();

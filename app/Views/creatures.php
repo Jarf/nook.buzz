@@ -3,7 +3,7 @@
 	<?php
 	foreach($creatures as $creature):
 		?>
-		<div class="creaturecontainer">
+		<div class="creaturecontainer" id="creature<?=$creature->id?>" data-id="<?=$creature->id?>">
 			<label for="<?=$creature->sanitisedname?>">
 				<div class="creatureicon">
 					<img height="128" width="128" alt="<?=$creature->name?>" src="/images/NH-Icon-<?=$creature->sanitisedname?>.png"/>
@@ -26,9 +26,9 @@
 					<li>Location: <?=ucfirst($creature->location)?></li>
 					<li>Time: <?=$creature->timereadable?></li>
 				</ul>
-				<input type="checkbox" id="found<?=$creature->sanitisedname?>" class="creaturefoundcheckbox"/>
-				<label for="found<?=$creature->sanitisedname?>" class="creaturefoundbutton">
-					Discovered: <span class="yes">Yes</span><span class="no">No</span>
+				<input type="checkbox" data-id="<?=$creature->id?>" id="found<?=$creature->id?>" class="creaturefoundcheckbox"/>
+				<label for="found<?=$creature->id?>" class="creaturefoundbutton">
+					Donated: <span class="yes">Yes</span><span class="no">No</span>
 				</label>
 			</div>
 		</div>
@@ -38,3 +38,5 @@
 	<input type="radio" id="nocreatureselected" name="creatureselect" class="creaturecheckbox"/>
 	</div>
 </div>
+
+<script type="text/javascript" src="/js/creatures.js"></script>

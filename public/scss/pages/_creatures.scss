@@ -17,6 +17,11 @@
 				}
 			}
 		}
+		.creaturecontainer.discovered{
+			background-position: bottom right;
+			background-image: url('/images/icon-donated.png');
+			background-repeat: no-repeat;
+		}
 		.creatureinfocontainer{
 			display: none;
 			background-color: $infocolor;
@@ -64,13 +69,12 @@
 				cursor: pointer;
 			}
 			.creaturefoundbutton{
-				background-color: $bordercolor;
 				display: block;
 				margin: 8px 0;
 				padding: 8px;
 				border-radius: 4px;
 				text-align: center;
-				background-color: $infocolor;
+				background-color: $bordercolor;
 				.yes, .no{
 					display: none;
 				}

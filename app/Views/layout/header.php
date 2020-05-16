@@ -16,8 +16,8 @@
 </head>
 <body>
 	<div class="headermenu">
-		<a href="/fish" class="headerbutton fish <?=uri_string() === 'fish' ? 'active' : ''?>">
+		<a href="/fish" class="headerbutton fish <?=strpos(uri_string(), 'fish') === 0 ? 'active' : ''?>">
 		</a>
-		<a href="/insect" class="headerbutton insect <?=uri_string() === 'insect' ? 'active' : ''?>">
+		<a href="/insect" class="headerbutton insect <?=strpos(uri_string(), 'insect') === 0 ? 'active' : ''?>">
 		</a>
 	</div>

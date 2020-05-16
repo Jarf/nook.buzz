@@ -16,6 +16,11 @@ class Items extends Controller
 				$builder->where('available_months.month', date('n'));
 				$builder->orWhere('available_months.month IS NULL', null, false);
 			$builder->groupEnd();
+		}elseif($all !== 'all'){
+			$builder->groupStart();
+				$builder->where('available_months.month', intval(date_create_from_format('M', $all)->format('n')));
+				$builder->orWhere('available_months.month IS NULL', null, false);
+			$builder->groupEnd();
 		}
 		$builder->groupBy('creatures.id');
 		$builder->orderBy('creatures.sell', 'DESC');

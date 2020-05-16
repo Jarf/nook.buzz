@@ -1,6 +1,6 @@
 <div class="homepagecontainer">
 	<div class="homepage">
-		<h2>Welcome to nook.buzz</h2>
+		<h1>nook.buzz</h1>
 		<h4>What is this?</h4>
 		<p>
 			Having been furloughed during this pandemic I found myself delving into Animal Crossing: New Horizons.<br/>

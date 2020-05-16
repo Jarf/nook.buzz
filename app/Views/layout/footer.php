@@ -1,6 +1,6 @@
 	<div class="footercontainer">
 		<div class="footer">
-			nook.buzz
+			<a href="/">nook.buzz</a>
 		</div>
 	</div>
 </body>

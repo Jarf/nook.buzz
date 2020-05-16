@@ -1,6 +1,7 @@
 $backgroundcolor: #fff9e3;
 $bordercolor: #eaba6b;
 $infocolor: #fce6b4;
+$highlight: #2fadbc;
 
 @import 'layout/header';
 @import 'layout/footer';
@@ -20,4 +21,12 @@ body{
 	margin: 0;
 	background: $backgroundcolor;
 	font-family:'Conv_1579-fink-heavy-1361523207',Sans-Serif;
+	a{
+		color: $highlight;
+		text-decoration: none;
+	}
+	h1{
+		display: block;
+		text-align: center;
+	}
 }

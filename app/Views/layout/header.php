@@ -6,6 +6,11 @@
 	<meta http-equiv="content-language" content="en"/>
 	<meta name="google" content="notranslate" />
 
+	<meta property="og:type" content="website"/>
+    <meta property="og:title" content="nook.buzz"/>
+    <meta property="og:url" content="<?=current_url()?>"/>
+    <meta property="og:description" content="A mobile friendly tool to help track bugs/insects in Animal Crossing: New Horizons"/>
+
 	<link rel="stylesheet" href="/main.css" type="text/css" media="screen">
 
 	<link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />

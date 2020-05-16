@@ -1,4 +1,7 @@
 <div class="creaturelistcontainer">
+	<div class="month">
+		<?=$month?>
+	</div>
 	<div class="creaturelist">
 	<?php
 	foreach($creatures as $creature):

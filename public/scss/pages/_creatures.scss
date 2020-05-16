@@ -1,8 +1,18 @@
 .creaturelistcontainer{
 	.month{
+		height: 16px;
 		padding-top: 16px;
 		display: block;
 		text-align: center;
+		line-height: 16px;
+		vertical-align: middle;
+		.monthselect{
+			display: inline-block;
+			width: 60px;
+			text-decoration: inherit;
+			color: inherit;
+			cursor: pointer;
+		}
 	}
 	display: block;
 	width: 100%;

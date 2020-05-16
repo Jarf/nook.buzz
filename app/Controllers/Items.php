@@ -12,6 +12,7 @@ class Items extends Controller
 		$builder->join('available_months', 'creatures.id = available_months.creature_id', 'left');
 		$builder->where('creatures.type', $type);
 		$month = date('F');
+		$monthno = intval(date('n'));
 		if($all === 'false'){
 			$builder->groupStart();
 				$builder->where('available_months.month', date('n'));
@@ -20,18 +21,35 @@ class Items extends Controller
 		}elseif($all !== 'all'){
 			$builder->groupStart();
 				$month = date_create_from_format('M', $all);
-				$builder->where('available_months.month', intval($month->format('n')));
+				$monthno = intval($month->format('n'));
+				$builder->where('available_months.month', $monthno);
 				$month = $month->format('F');
 				$builder->orWhere('available_months.month IS NULL', null, false);
 			$builder->groupEnd();
 		}else{
 			$month = 'All';
+			$monthno = $monthnext = $monthprev = null;
+		}
+		if($monthno !== null){
+			$monthnext = $monthno + 1;
+			if($monthnext > 12){
+				$monthnext = 1;
+			}
+			$monthprev = $monthno - 1;
+			if($monthprev < 1){
+				$monthprev = 12;
+			}
+			$monthnext = strtolower(date_create_from_format('n', $monthnext)->format('M'));
+			$monthprev = strtolower(date_create_from_format('n', $monthprev)->format('M'));
 		}
 		$data['month'] = $month;
+		$data['monthprev'] = $monthprev;
+		$data['monthnext'] = $monthnext;
 		$builder->groupBy('creatures.id');
 		$builder->orderBy('creatures.sell', 'DESC');
 		$query = $builder->get();
 		$data['creatures'] = array();
+		$data['type'] = $type;
 		foreach($query->getResult() as $row){
 
 			// Sanitise name for icon

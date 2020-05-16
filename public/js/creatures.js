@@ -17,7 +17,6 @@ var displayfound = function(){
 		var creatureid = creature.getAttribute('data-id');
 		if(found.indexOf(creatureid) !== -1){
 			creature.classList.add('discovered');
-			console.log('found' + creatureid);
 			var checkbox = document.getElementById('found' + creatureid);
 			if(checkbox !== null){
 				checkbox.checked = true;

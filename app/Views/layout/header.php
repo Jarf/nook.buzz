@@ -10,7 +10,7 @@
     <meta property="og:title" content="nook.buzz"/>
     <meta property="og:url" content="<?=current_url()?>"/>
     <meta property="og:description" content="A mobile friendly tool to help track bugs/insects in Animal Crossing: New Horizons"/>
-    <meta property="og:image" content="/favicon-32x32.png"/>
+    <meta property="og:image" content="<?=base_url('/images/icon-honeybee.png')?>"/>
 
 	<link rel="stylesheet" href="/main.css" type="text/css" media="screen">
 

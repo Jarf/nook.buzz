@@ -44,31 +44,31 @@ class Items extends Controller
 
 			// Parse size
 			switch ($row->size) {
-				case 0:
+				case '0':
 					$row->sizereadable = 'Narrow';
 					break;
 
-				case 1:
+				case '1':
 					$row->sizereadable = 'Tiny';
 					break;
 
-				case 2:
+				case '2':
 					$row->sizereadable = 'Small';
 					break;
 
-				case 3:
+				case '3':
 					$row->sizereadable = 'Medium';
 					break;
 
-				case 4:
+				case '4':
 					$row->sizereadable = 'Large';
 					break;
 
-				case 5:
+				case '5':
 					$row->sizereadable = 'Very Large';
 					break;
 
-				case 6:
+				case '6':
 					$row->sizereadable = 'Huge';
 					break;
 				
@@ -142,35 +142,37 @@ class Items extends Controller
 								if($category === 'fish'){
 									if(stripos($source, 'finned') !== false){
 										$fin = 1;
+										$size = 6;
 									}
-									if(preg_match('/^North:\s([A-Za-z\s]+)\sShadows/', $source, $shadowsize) === 1){
-										switch (strtolower(end($shadowsize))) {
+									if(preg_match('/^North:\s([A-Za-z\s]+)\sShadows/i', $source, $shadowsize) === 1){
+										$shadowsize = trim(strtolower(end($shadowsize)));
+										switch ($shadowsize) {
 											case 'narrow':
-												$size = 0;
+												$size = '0';
 												break;
 
 											case 'tiny':
-												$size = 1;
+												$size = '1';
 												break;
 											
 											case 'small':
-												$size = 2;
+												$size = '2';
 												break;
 
 											case 'medium':
-												$size = 3;
+												$size = '3';
 												break;
 
 											case 'large':
-												$size = 4;
+												$size = '4';
 												break;
 
 											case 'very large':
-												$size = 5;
+												$size = '5';
 												break;
 
 											case 'huge':
-												$size = 6;
+												$size = '6';
 												break;
 										}
 
@@ -374,6 +376,10 @@ class Items extends Controller
 				}
 			}
 
+			// print "<pre>";
+			// var_dump($iteminsert);
+			// exit();
+
 			$db->transStart();
 			// Truncate tables
 				$db->query('SET FOREIGN_KEY_CHECKS = 0');
@@ -381,6 +387,7 @@ class Items extends Controller
 				$db->query('TRUNCATE TABLE creatures');
 				$db->query('SET FOREIGN_KEY_CHECKS = 1');
 			$db->transComplete();
+
 
 			// Insert creatures
 			$builder = $db->table('creatures');

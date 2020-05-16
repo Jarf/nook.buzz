@@ -20,7 +20,7 @@
 				</div>
 				<ul class="creatureinfo">
 					<li>Value: <?=$creature->sell?></li>
-					<?php if(!empty($creature->size)): ?>
+					<?php if($creature->size !== NULL): ?>
 					<li>Size: <?=$creature->sizereadable?></li>
 					<?php endif; ?>
 					<li>Location: <?=ucfirst($creature->location)?></li>

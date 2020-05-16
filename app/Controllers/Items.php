@@ -264,7 +264,7 @@ class Items extends Controller
 											$foundat = 'river mouth';
 											break;
 									}
-								}elseif(preg_match('/^North:\s([A-Za-z\s]+),/i', $source, $location) && $category === 'insect'){
+								}elseif(preg_match('/^North:\s([A-Za-z\s\(\)]+),/i', $source, $location) && $category === 'insect'){
 									$location = trim(strtolower(end($location)));
 									switch($location) {
 										case 'flying around':

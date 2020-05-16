@@ -212,7 +212,7 @@ class Items extends Controller
 								}
 
 								// Get time
-								if(preg_match('/\((.*)\)$/', $source, $time) === 1){
+								if(preg_match('/\(([\d\-a-zA-Z]+)\)$/', $source, $time) === 1){
 									$time = end($time);
 									if(strtolower($time) !== 'all day'){
 										$times = explode('-', $time);

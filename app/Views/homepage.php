@@ -10,7 +10,7 @@
 		<p>
 			Click one of those icons at the top to go to fish/insects for the current month.<br/>
 			Once there you will find that they are sorted from most to least valuable.<br/>
-			Clicking on a creature will bring up a dialogue providing information on the availabilty and how to catch the. You can also mark then as donated at which point a blathers stick will appear next to the picture helping you keep track of what is new.<br/>
+			Clicking on a creature will bring up a dialogue providing information on the availabilty and how to catch them. You can also mark then as donated at which point a blathers stick will appear next to the picture helping you keep track of what is new.<br/>
 			If you wish to view another month to see what is coming up you can click the arrows besides the displayed month's name to go to the next or previous month.
 		</p>
 		<h4>I have feedback!</h4>

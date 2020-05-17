@@ -5,7 +5,7 @@ use CodeIgniter\Controller;
 class Items extends Controller
 {
 
-	public function index(string $type, string $all = 'false')
+	public function index(string $type, string $all = 'false', string $hemisphere = 'north')
 	{
 		$db = \Config\Database::connect();
 		$builder = $db->table('creatures');
@@ -13,6 +13,7 @@ class Items extends Controller
 		$builder->where('creatures.type', $type);
 		$month = date('F');
 		$monthno = intval(date('n'));
+		$monthsearch = $monthno;
 		if($all === 'false'){
 			$builder->groupStart();
 				$builder->where('available_months.month', date('n'));
@@ -22,7 +23,13 @@ class Items extends Controller
 			$builder->groupStart();
 				$month = date_create_from_format('M', $all);
 				$monthno = intval($month->format('n'));
-				$builder->where('available_months.month', $monthno);
+				if($hemisphere === 'south'){
+					$monthsearch = $monthno + 6;
+					if($monthsearch > 12){
+						$monthsearch = $monthsearch - 12;
+					}
+				}
+				$builder->where('available_months.month', $monthsearch);
 				$month = $month->format('F');
 				$builder->orWhere('available_months.month IS NULL', null, false);
 			$builder->groupEnd();
@@ -45,6 +52,7 @@ class Items extends Controller
 		$data['month'] = $month;
 		$data['monthprev'] = $monthprev;
 		$data['monthnext'] = $monthnext;
+		$data['hemisphere'] = $hemisphere;
 		$builder->groupBy('creatures.id');
 		$builder->orderBy('creatures.sell', 'DESC');
 		$query = $builder->get();
@@ -115,7 +123,7 @@ class Items extends Controller
 
 		}
 
-		echo view('layout/header');
+		echo view('layout/header', $data);
 		echo view('creatures', $data);
 		echo view('layout/footer');
 	}

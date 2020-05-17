@@ -21,9 +21,14 @@
     <title>nook.buzz</title>
 </head>
 <body>
+	<?php
+	if(!isset($hemisphere)){
+		$hemisphere = 'north';
+	}
+	?>
 	<div class="headermenu">
-		<a href="/fish/<?=strtolower(date('F'))?>" class="headerbutton fish <?=strpos(uri_string(), 'fish') === 0 ? 'active' : ''?>">
+		<a href="/fish/<?=strtolower(date('F'))?>/<?=$hemisphere?>" class="headerbutton fish <?=strpos(uri_string(), 'fish') === 0 ? 'active' : ''?>">
 		</a>
-		<a href="/insect/<?=strtolower(date('F'))?>" class="headerbutton insect <?=strpos(uri_string(), 'insect') === 0 ? 'active' : ''?>">
+		<a href="/insect/<?=strtolower(date('F'))?>/<?=$hemisphere?>" class="headerbutton insect <?=strpos(uri_string(), 'insect') === 0 ? 'active' : ''?>">
 		</a>
 	</div>

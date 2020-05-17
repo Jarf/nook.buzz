@@ -4,6 +4,9 @@
 		<?=$month?>
 		<a class="monthselect nextmonth" href="/<?=$type?>/<?=$monthnext?>/<?=$hemisphere?>">></a>
 	</div>
+	<div class="hemisphere">
+		<a href="<?=$hemispheretoggle?>">Hemisphere: <?=ucfirst($hemisphere)?></a>
+	</div>
 	<div class="creaturelist">
 	<?php
 	foreach($creatures as $creature):

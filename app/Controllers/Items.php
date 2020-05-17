@@ -53,6 +53,7 @@ class Items extends Controller
 		$data['monthprev'] = $monthprev;
 		$data['monthnext'] = $monthnext;
 		$data['hemisphere'] = $hemisphere;
+		$data['hemispheretoggle'] = '/' . $type . '/' . $all . '/' . ($hemisphere === 'north' ? 'south' : 'north');
 		$builder->groupBy('creatures.id');
 		$builder->orderBy('creatures.sell', 'DESC');
 		$query = $builder->get();

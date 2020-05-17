@@ -22,8 +22,8 @@
 </head>
 <body>
 	<div class="headermenu">
-		<a href="/fish" class="headerbutton fish <?=strpos(uri_string(), 'fish') === 0 ? 'active' : ''?>">
+		<a href="/fish/<?=strtolower(date('F'))?>" class="headerbutton fish <?=strpos(uri_string(), 'fish') === 0 ? 'active' : ''?>">
 		</a>
-		<a href="/insect" class="headerbutton insect <?=strpos(uri_string(), 'insect') === 0 ? 'active' : ''?>">
+		<a href="/insect/<?=strtolower(date('F'))?>" class="headerbutton insect <?=strpos(uri_string(), 'insect') === 0 ? 'active' : ''?>">
 		</a>
 	</div>

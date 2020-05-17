@@ -35,6 +35,7 @@ $routes->add('itemsimport', 'Items::importer');
 $routes->add('/main.css', 'Files::styles');
 $routes->add('/(:alpha)', 'Items::index/$1');
 $routes->add('/(:alpha)/(:alpha)', 'Items::index/$1/$2');
+$routes->add('/(:alpha)/(:alpha)/(:alpha)', 'Items::index/$1/$2/$3');
 
 /**
  * --------------------------------------------------------------------

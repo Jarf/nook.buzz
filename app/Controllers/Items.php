@@ -22,7 +22,7 @@ class Items extends Controller
 		}elseif($all !== 'all'){
 			$builder->groupStart();
 				$month = date_create_from_format('M', $all);
-				$monthno = intval($month->format('n'));
+				$monthno = $monthsearch = intval($month->format('n'));
 				if($hemisphere === 'south'){
 					$monthsearch = $monthno + 6;
 					if($monthsearch > 12){

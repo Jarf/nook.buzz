@@ -36,10 +36,12 @@
 					<li>Location: <?=ucfirst($creature->location)?></li>
 					<li>Time: <?=$creature->timereadable?></li>
 				</ul>
+				<?php if(in_array($type, $donatetypes)): ?>
 				<input type="checkbox" data-id="<?=$creature->id?>" id="found<?=$creature->id?>" class="creaturefoundcheckbox"/>
 				<label for="found<?=$creature->id?>" class="creaturefoundbutton">
 					Donated: <span class="yes">Yes</span><span class="no">No</span>
 				</label>
+				<?php endif; ?>
 			</div>
 		</div>
 		<?php

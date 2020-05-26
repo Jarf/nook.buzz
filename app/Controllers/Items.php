@@ -59,6 +59,7 @@ class Items extends Controller
 		$query = $builder->get();
 		$data['creatures'] = array();
 		$data['type'] = $type;
+		$data['monthtypes'] = array('fish','insect');
 		foreach($query->getResult() as $row){
 
 			// Sanitise name for icon

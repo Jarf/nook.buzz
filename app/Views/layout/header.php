@@ -31,4 +31,6 @@
 		</a>
 		<a href="/insect/<?=strtolower(date('F'))?>/<?=$hemisphere?>" class="headerbutton insect <?=strpos(uri_string(), 'insect') === 0 ? 'active' : ''?>">
 		</a>
+		<a href="/shell" class="headerbutton shell <?=strpos(uri_string(), 'shell') === 0 ? 'active' : ''?>">
+		</a>
 	</div>

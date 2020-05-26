@@ -1,4 +1,5 @@
 <div class="creaturelistcontainer">
+	<?php if(in_array($type, $monthtypes)): ?>
 	<div class="month">
 		<a class="monthselect previousmonth" href="/<?=$type?>/<?=$monthprev?>/<?=$hemisphere?>"><</a>
 		<?=$month?>
@@ -7,6 +8,7 @@
 	<div class="hemisphere">
 		<a href="<?=$hemispheretoggle?>">Hemisphere: <?=ucfirst($hemisphere)?></a>
 	</div>
+	<?php endif; ?>
 	<div class="creaturelist">
 	<?php
 	foreach($creatures as $creature):

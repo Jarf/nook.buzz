@@ -21,7 +21,7 @@ class Items extends Controller
 			$builder->groupEnd();
 		}elseif($all !== 'all'){
 			$builder->groupStart();
-				$month = date_create_from_format('M', $all);
+				$month = date_create_from_format('!M', ucfirst($all));
 				$monthno = $monthsearch = intval($month->format('n'));
 				if($hemisphere === 'south'){
 					$monthsearch = $monthno + 6;
@@ -46,8 +46,8 @@ class Items extends Controller
 			if($monthprev < 1){
 				$monthprev = 12;
 			}
-			$monthnext = strtolower(date_create_from_format('n', $monthnext)->format('M'));
-			$monthprev = strtolower(date_create_from_format('n', $monthprev)->format('M'));
+			$monthnext = strtolower(date('M', mktime(0, 0, 0, $monthnext, 10)));
+			$monthprev = strtolower(date('M', mktime(0, 0, 0, $monthprev, 10)));
 		}
 		$data['month'] = $month;
 		$data['monthprev'] = $monthprev;
